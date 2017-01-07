@@ -14,11 +14,29 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JScrollBar;
+import javax.swing.JTextField;
+import java.awt.Font;
 
 public class GUItest extends JFrame {
 
 	private JPanel contentPane;
-
+	public static ImageIcon basket = new ImageIcon(GUItest.class.getResource("/osGUI/basket.png"));
+	public static ImageIcon cubicle = new ImageIcon(GUItest.class.getResource("/osGUI/cubicle.png"));
+	public static ImageIcon full_basket = new ImageIcon(GUItest.class.getResource("/osGUI/full_basket.png"));
+	public static ImageIcon full_cubicle = new ImageIcon(GUItest.class.getResource("/osGUI/full_cubicle.png"));
+	public static JLabel baskets[] = new JLabel[10];
+	public static JLabel cubicles[] = new JLabel[5];
+	public static JTextArea ta = new JTextArea();
+	public static JScrollPane scrollPane = new JScrollPane(ta);
+	public static int waiting_num;
+	Demo d = new Demo();
+	public static JTextField textField;
 	/**
 	 * Launch the application.
 	 */
@@ -47,113 +65,128 @@ public class GUItest extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		waiting_num = 0;
 		
-		JLabel basket1 = new JLabel("");
-		basket1.setIcon(new ImageIcon(GUItest.class.getResource("/osGUI/basket.png")));
-		basket1.setBounds(35, 28, 100, 100);
-		contentPane.add(basket1);
+		baskets[0] = new JLabel("");
+		baskets[0].setIcon(basket);
+		baskets[0].setBounds(35, 28, 100, 100);
+		contentPane.add(baskets[0]);
 		
-		JLabel basket2 = new JLabel("");
-		basket2.setIcon(new ImageIcon(GUItest.class.getResource("/osGUI/basket.png")));
-		basket2.setBounds(145, 28, 100, 100);
-		contentPane.add(basket2);
+		baskets[1] = new JLabel("");
+		baskets[1].setIcon(basket);
+		baskets[1].setBounds(145, 28, 100, 100);
+		contentPane.add(baskets[1]);
 		
-		JLabel basket3 = new JLabel("");
-		basket3.setIcon(new ImageIcon(GUItest.class.getResource("/osGUI/basket.png")));
-		basket3.setBounds(255, 28, 100, 100);
-		contentPane.add(basket3);
+		baskets[2] = new JLabel("");
+		baskets[2].setIcon(basket);
+		baskets[2].setBounds(255, 28, 100, 100);
+		contentPane.add(baskets[2]);
 		
-		JLabel basket4 = new JLabel("");
-		basket4.setIcon(new ImageIcon(GUItest.class.getResource("/osGUI/basket.png")));
-		basket4.setBounds(365, 28, 100, 100);
-		contentPane.add(basket4);
+		baskets[3] = new JLabel("");
+		baskets[3].setIcon(basket);
+		baskets[3].setBounds(365, 28, 100, 100);
+		contentPane.add(baskets[3]);
 		
-		JLabel basket5 = new JLabel("");
-		basket5.setIcon(new ImageIcon(GUItest.class.getResource("/osGUI/basket.png")));
-		basket5.setBounds(475, 28, 100, 100);
-		contentPane.add(basket5);
+		baskets[4] = new JLabel("");
+		baskets[4].setIcon(basket);
+		baskets[4].setBounds(475, 28, 100, 100);
+		contentPane.add(baskets[4]);
 		
-		JLabel basket6 = new JLabel("");
-		basket6.setIcon(new ImageIcon(GUItest.class.getResource("/osGUI/basket.png")));
-		basket6.setBounds(585, 28, 100, 100);
-		contentPane.add(basket6);
+		baskets[5] = new JLabel("");
+		baskets[5].setIcon(basket);
+		baskets[5].setBounds(585, 28, 100, 100);
+		contentPane.add(baskets[5]);
 		
-		JLabel basket7 = new JLabel("");
-		basket7.setIcon(new ImageIcon(GUItest.class.getResource("/osGUI/basket.png")));
-		basket7.setBounds(695, 28, 100, 100);
-		contentPane.add(basket7);
+		baskets[6] = new JLabel("");
+		baskets[6].setIcon(basket);
+		baskets[6].setBounds(695, 28, 100, 100);
+		contentPane.add(baskets[6]);
 		
-		JLabel basket8 = new JLabel("");
-		basket8.setIcon(new ImageIcon(GUItest.class.getResource("/osGUI/basket.png")));
-		basket8.setBounds(805, 28, 100, 100);
-		contentPane.add(basket8);
+		baskets[7] = new JLabel("");
+		baskets[7].setIcon(basket);
+		baskets[7].setBounds(805, 28, 100, 100);
+		contentPane.add(baskets[7]);
 		
-		JLabel basket9 = new JLabel("");
-		basket9.setIcon(new ImageIcon(GUItest.class.getResource("/osGUI/basket.png")));
-		basket9.setBounds(915, 28, 100, 100);
-		contentPane.add(basket9);
+		baskets[8] = new JLabel("");
+		baskets[8].setIcon(basket);
+		baskets[8].setBounds(915, 28, 100, 100);
+		contentPane.add(baskets[8]);
 		
-		JLabel basket10 = new JLabel("");
-		basket10.setIcon(new ImageIcon(GUItest.class.getResource("/osGUI/basket.png")));
-		basket10.setBounds(1025, 28, 100, 100);
-		contentPane.add(basket10);
+		baskets[9] = new JLabel("");
+		baskets[9].setIcon(basket);
+		baskets[9].setBounds(1025, 28, 100, 100);
+		contentPane.add(baskets[9]);
 		
-		JLabel door1 = new JLabel(""){
-			@Override
-            public void paintComponent(Graphics g) {
-                Graphics2D g2 = (Graphics2D) g;
-                g2.rotate(Math.toRadians(90),50,50);
-                super.paintComponent(g);
-            }
-		};
-		door1.setVerticalAlignment(SwingConstants.BOTTOM);
-		door1.setIcon(new ImageIcon(GUItest.class.getResource("/osGUI/door.png")));
-		door1.setBounds(35, 595, 100, 100);
-		//((Graphics2D)door1.getGraphics()).rotate(Math.toRadians(90));
-		contentPane.add(door1);
+		cubicles[0] = new JLabel("");
+		cubicles[0].setIcon(cubicle);
+		cubicles[0].setBounds(35, 145, 100, 100);
+		contentPane.add(cubicles[0]);
 		
-		JLabel door2 = new JLabel("");
-		door2.setVerticalAlignment(SwingConstants.BOTTOM);
-		door2.setIcon(new ImageIcon(GUItest.class.getResource("/osGUI/door.png")));
-		door2.setBounds(145, 595, 100, 100);
-		contentPane.add(door2);
+		cubicles[1] = new JLabel("");
+		cubicles[1].setIcon(cubicle);
+		cubicles[1].setBounds(145, 145, 100, 100);
+		contentPane.add(cubicles[1]);
 		
-		JLabel door3 = new JLabel("");
-		door3.setVerticalAlignment(SwingConstants.BOTTOM);
-		door3.setIcon(new ImageIcon(GUItest.class.getResource("/osGUI/door.png")));
-		door3.setBounds(255, 595, 100, 100);
-		contentPane.add(door3);
+		cubicles[2] = new JLabel("");
+		cubicles[2].setIcon(cubicle);
+		cubicles[2].setBounds(255, 145, 100, 100);
+		contentPane.add(cubicles[2]);
 		
-		JLabel door4 = new JLabel(""){
-			@Override
-            public void paintComponent(Graphics g) {
-            Graphics2D g2 = (Graphics2D) g;
-            g2.rotate(Math.toRadians(90),50,50);
-            super.paintComponent(g);
-        }};
-		door4.setVerticalAlignment(SwingConstants.BOTTOM);
-		door4.setIcon(new ImageIcon(GUItest.class.getResource("/osGUI/door.png")));
-		door4.setBounds(365, 595, 100, 100);
-		contentPane.add(door4);
+		cubicles[3] = new JLabel("");
+		cubicles[3].setIcon(cubicle);
+		cubicles[3].setBounds(365, 145, 100, 100);
+		contentPane.add(cubicles[3]);
 		
-		JLabel door5 = new JLabel(""){
-			/*@Override
-            public void paintComponent(Graphics g) {
-                Graphics2D g2 = (Graphics2D) g;
-                g2.rotate(Math.toRadians(90),100,90);
-                super.paintComponent(g);
-            }*/
-		};
-		door5.setVerticalAlignment(SwingConstants.BOTTOM);
-		door5.setIcon(new ImageIcon(GUItest.class.getResource("/osGUI/door.png")));
-		door5.setBounds(475, 595, 100, 100);
-		contentPane.add(door5);
-		
-		JLabel pool_door = new JLabel("");
-		pool_door.setIcon(new ImageIcon(GUItest.class.getResource("/osGUI/door.png")));
-		pool_door.setBounds(1103, 685, 100, 10);
-		contentPane.add(pool_door);
-	}
+		cubicles[4] = new JLabel("");
+		cubicles[4].setIcon(cubicle);
+		cubicles[4].setBounds(475, 145, 100, 100);
+		contentPane.add(cubicles[4]);
 	
+		
+		JButton btn = new JButton("add 1");
+		btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Thread(){//避免畫面假死
+					public void run(){
+						d.add();
+					}
+				}.start();
+			}
+		});
+		btn.setBounds(1265, 28, 87, 23);
+		contentPane.add(btn);
+
+		
+		ta.setLineWrap(true);
+		
+		scrollPane.setBounds(1159, 62, 193, 633);
+		contentPane.add(scrollPane);
+		
+		textField = new JTextField();
+		textField.setFont(new Font("新細明體", Font.PLAIN, 26));
+		textField.setBounds(924, 625, 225, 70);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		textField.setText("Waiting : " + waiting_num);
+		
+		
+		
+	}
+	public static void basket_change(int i,boolean b){
+		if(b){
+			baskets[i].setIcon(full_basket);
+		}
+		else{
+			baskets[i].setIcon(basket);
+		}
+	}
+	public static void cubicle_change(int i,boolean b){
+		if(b){
+			cubicles[i].setIcon(full_cubicle);
+		}
+		else{
+			cubicles[i].setIcon(cubicle);
+		}
+	}
 }
 

@@ -16,11 +16,6 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>src/osGUI/door.png</name>
-			<type>1</type>
-			<location>D:/Autumn/桌面/eclipse/workspace/GUI/src/osGUI/door.png</location>
-		</link>
-		<link>
 			<name>src/osGUI/full_basket.png</name>
 			<type>1</type>
 			<location>D:/Autumn/桌面/eclipse/workspace/GUI/src/osGUI/full_basket.png</location>
