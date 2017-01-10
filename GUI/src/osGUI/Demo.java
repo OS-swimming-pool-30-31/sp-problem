@@ -19,24 +19,11 @@ public class Demo {
 		inThreadList = null;
     }
 	public static void add(){
-		if(basket_num > 9){
-			GUItest.textField.setText("Waiting : " + ++GUItest.waiting_num);
-		}
-		while(basket_num > 9){
-			staticWait();
-		}
-		if(GUItest.waiting_num > 0){
-			GUItest.textField.setText("Waiting : " + --GUItest.waiting_num);
-		}
-    	number++;
-    	basket_num++;
+		number++;
     	InThread inThread = new InThread(number);
     	inThread.start();
 	}
-	public static void leave(){
-		basket_num--;
-		staticNotify();
-	}
+	
 	public static void printInf() {
 		
 		System.out.println("淋浴間:");
@@ -51,19 +38,5 @@ public class Demo {
 		}
 		System.out.println();
 	}
-	static private Object obj = new Object();
-
-    public static void staticWait() {
-        synchronized (obj) {
-            try {
-                obj.wait();
-            } catch (Exception e) {}
-        }    
-    }
-
-    public static void staticNotify() {
-        synchronized (obj) {
-            obj.notify();
-        }
-    }
+	
 }

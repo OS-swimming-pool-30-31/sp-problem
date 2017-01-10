@@ -1,7 +1,5 @@
 package osGUI;
 
-import java.util.Random;
-
 public class InThread extends Thread  {
 	
 	private boolean active;
@@ -13,17 +11,37 @@ public class InThread extends Thread  {
 	   	number = num;
 	   	situ = 0;
 	}
-	    
-	public void setActive(boolean active) {
-	    this.active = active;
-	}
+	
+	static private Object obj = new Object();
 
-	public boolean isActive() {
-	    return active;
-	}
+    public static void staticWait() {
+        synchronized (obj) {
+            try {
+                obj.wait();
+            } catch (Exception e) {}
+        }    
+    }
 
+    public static void staticNotify() {
+        synchronized (obj) {
+            obj.notify();
+        }
+    }
+	public static void leave(){
+		Demo.basket_num--;
+		staticNotify();
+	}
 	public void run () {
-	    		
+		if(Demo.basket_num > 9){
+			GUItest.textField.setText("Waiting : " + ++GUItest.waiting_num);
+		}
+		while(Demo.basket_num > 9){
+			staticWait();
+		}
+		if(GUItest.waiting_num > 0){
+			GUItest.textField.setText("Waiting : " + --GUItest.waiting_num);
+		}
+    	Demo.basket_num++;
 	    while(situ<5) {
 	        	
 	      	switch(situ) {
@@ -104,7 +122,7 @@ public class InThread extends Thread  {
 	        				GUItest.basket_change(i, false);
 	        				Demo.cubicle[temp] = 0;
 	    	        		GUItest.cubicle_change(temp, false);
-	        				Demo.leave();
+	        				leave();
 	        			}
 	        		}
 	        		situ++;
