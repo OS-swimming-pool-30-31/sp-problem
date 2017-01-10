@@ -2,12 +2,10 @@ package osGUI;
 
 public class InThread extends Thread  {
 	
-	private boolean active;
 	private int number;
 	private int situ;
 	private int temp;
 	public InThread(int num) {
-		active = true;
 	   	number = num;
 	   	situ = 0;
 	}
