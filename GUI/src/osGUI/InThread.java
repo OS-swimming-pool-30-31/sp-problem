@@ -25,10 +25,12 @@ public class InThread extends Thread  {
             obj.notify();
         }
     }
+    
 	public static void leave(){
 		Demo.basket_num--;
 		staticNotify();
 	}
+	
 	public void run () {
 		if(Demo.basket_num > 9){
 			GUItest.textField.setText("Waiting : " + ++GUItest.waiting_num);
@@ -108,7 +110,7 @@ public class InThread extends Thread  {
 	        				GUItest.ta.append(number + "找不到房間回家" + "\r\n");
 	        			}
 	        				
-	        		}
+	        		} 
 	        		break;
 	        	}
 	        	case 4:{
@@ -128,7 +130,8 @@ public class InThread extends Thread  {
 	        	}
 	        }
 	      	try {
-	      		Thread.currentThread().sleep(3000);
+	      		Thread.currentThread();
+				Thread.sleep(3000);
             } 
             catch(InterruptedException e) {
                  e.printStackTrace();
